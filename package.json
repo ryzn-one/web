@@ -1,0 +1,10 @@
+{
+  "name": "ryzn-web",
+  "private": true,
+  "version": "0.9.0",
+  "scripts": {
+    "dev": "npm --prefix app run dev",
+    "build": "npm --prefix app install && npm --prefix app run build && node scripts/assemble.mjs",
+    "preview": "npx --yes serve dist"
+  }
+}
