@@ -152,6 +152,18 @@
   .q .who b{font-size:14px;display:block}
   .q .who span{font-family:var(--mono);font-size:9.5px;color:#A5A39D;letter-spacing:.1em}
 
+  /* teams */
+  .teams{background:var(--teal);color:#fff}
+  .teams .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+  .teams h2{color:#fff}
+  .teams p{color:#CDE9DF;font-size:15.5px;line-height:1.6;margin-top:14px;max-width:520px}
+  .teams .btn{background:#fff;color:var(--ink);margin-top:26px}
+  .teams-card{background:rgba(26,26,26,.22);border-radius:18px;padding:10px 24px}
+  .teams-card .line{display:flex;align-items:center;justify-content:space-between;gap:18px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.16)}
+  .teams-card .line:last-child{border-bottom:none}
+  .teams-card .line span{color:#A9D6C7}
+  .teams-card .line b{font-weight:700;text-align:right}
+
   /* dual cta */
   .dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .panel{border-radius:22px;padding:44px 38px;color:#fff;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
@@ -169,7 +181,7 @@
   .foot-links{display:flex;gap:22px;font-size:13.5px;font-weight:600;color:var(--gray)}
 
   @media(max-width:920px){
-    .hero-grid,.split,.meets .wrap,.quotes,.dual{grid-template-columns:1fr}
+    .hero-grid,.split,.meets .wrap,.teams .wrap,.quotes,.dual{grid-template-columns:1fr}
     .mock{height:470px;margin-top:10px}
     .stats-grid{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr)}
@@ -185,7 +197,7 @@
   <div class="wrap nav-in">
     <a class="logo" href="#top">RYZN</a>
     <div class="nav-links">
-      <a href="#how">Program</a><a href="#badges">Badges</a><a href="#mentors">Mentors</a><a href="#meets">Meets</a>
+      <a href="#how">Program</a><a href="#badges">Badges</a><a href="#mentors">Mentors</a><a href="#meets">Meets</a><a href="#teams">For teams</a>
     </div>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="/app/">Sign in</a>
@@ -416,6 +428,23 @@
   </div>
 </section>
 
+<section class="teams" id="teams">
+  <div class="wrap">
+    <div>
+      <span class="mono" style="font-size:10px;color:#A9D6C7;letter-spacing:.18em">RYZN FOR TEAMS · PILOT COHORTS</span>
+      <h2>The same engine, inside your company.</h2>
+      <p>Your people get the app they actually open: a matched roster, Direct Connect they earn, streaks and badges. HR gets the console - divisions, programs, matching rules, live participation, and an at-risk list before anyone quietly checks out.</p>
+      <a class="btn" href="mailto:support@ryzn.one?subject=Ryzn%20for%20Teams%20pilot">Talk about a pilot →</a>
+    </div>
+    <div class="teams-card">
+      <div class="line"><span>PILOT LENGTH</span><b>90 DAYS</b></div>
+      <div class="line"><span>SETUP</span><b>2 WEEKS · DONE FOR YOU</b></div>
+      <div class="line"><span>ACCESS</span><b>SSO · ROLE-BASED</b></div>
+      <div class="line"><span>DELIVERABLE</span><b>DAY-90 RESULTS REPORT</b></div>
+    </div>
+  </div>
+</section>
+
 <section id="cta" style="padding-top:20px">
   <div class="wrap dual">
     <div class="panel mentee">
@@ -440,7 +469,7 @@
       <div class="mono" style="margin-top:8px">RISE NOW. · RYZN.ONE · BUILT IN TORONTO</div>
     </div>
     <div class="foot-links">
-      <a href="#how">Program</a><a href="#badges">Verify a badge</a><a href="#mentors">The Roster</a><a href="#meets">Mentor Meets</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+      <a href="#how">Program</a><a href="#badges">Verify a badge</a><a href="#mentors">The Roster</a><a href="#meets">Mentor Meets</a><a href="#teams">Ryzn for Teams</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
     </div>
     <div class="mono" style="max-width:280px;line-height:2">MENTORS ARE VETTED AND BACKGROUND-CHECKED. GUARDIAN CONSENT REQUIRED UNDER 18.</div>
   </div>
