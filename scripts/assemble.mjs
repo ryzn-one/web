@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync } from "node:fs";
+﻿import { copyFileSync, cpSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -11,4 +11,18 @@ copyFileSync(join(root, "site", "mentor-invite.html"), join(dist, "mentor-invite
 copyFileSync(join(root, "site", "privacy.html"), join(dist, "privacy.html"));
 copyFileSync(join(root, "site", "terms.html"), join(dist, "terms.html"));
 
-console.log("Assembled site + /app into dist/");
+const brandingSrc = join(root, "site", "branding");
+if (existsSync(brandingSrc)) {
+  cpSync(brandingSrc, join(dist, "branding"), { recursive: true });
+}
+
+/* Browsers still request /favicon.ico by default even when <link rel="icon"> is set. */
+const faviconSrc = join(root, "site", "favicon.ico");
+const faviconFromKit = join(root, "site", "branding", "ryzn-brand-kit", "icon", "favicon.ico");
+if (existsSync(faviconSrc)) {
+  copyFileSync(faviconSrc, join(dist, "favicon.ico"));
+} else if (existsSync(faviconFromKit)) {
+  copyFileSync(faviconFromKit, join(dist, "favicon.ico"));
+}
+
+console.log("Assembled site + branding + /app into dist/");

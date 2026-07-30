@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import RyznComplete from "./RyznApp.jsx";
+import RyznTeams from "./teams/RyznTeams.jsx";
+import { Brand } from "./branding.js";
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { err: null }; }
@@ -11,8 +13,8 @@ class ErrorBoundary extends React.Component {
     if (this.state.err) return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Space Grotesk', system-ui, sans-serif", background: "#E9E8E4" }}>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 34, fontWeight: 700, color: "#5B4FCF" }}>RYZN</div>
-          <div style={{ marginTop: 10, color: "#5F5E5A" }}>Something broke. Refresh to rise again.</div>
+          <img src={Brand.logo.horizontal.purple} alt="Ryzn" height={34} style={{ height: 34, width: "auto" }} />
+          <div style={{ marginTop: 14, color: "#5F5E5A" }}>Something broke. Refresh to rise again.</div>
         </div>
       </div>
     );
@@ -20,10 +22,21 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+/* Routes: default = consumer app · #/teams = Ryzn for Teams (B2B) */
+function Router() {
+  const [hash, setHash] = useState(window.location.hash);
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  return hash.startsWith("#/teams") ? <RyznTeams /> : <RyznComplete />;
+}
+
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <RyznComplete />
+      <Router />
     </ErrorBoundary>
   </React.StrictMode>
 );

@@ -7,6 +7,50 @@ import {
   X, SlidersHorizontal, RotateCcw, Search
 } from "lucide-react";
 import { C, F, TIER_COLOR, DECK_COLORS } from "./theme.js";
+import { logoSrc, Brand } from "./branding.js";
+
+/* ————— Brand marks (from public/branding/ryzn-brand-kit) ————— */
+export const BrandLogo = ({
+  variant = "horizontal",
+  color = "purple",
+  height = 28,
+  alt = "Ryzn",
+  style,
+  ...rest
+}) => (
+  <img
+    src={logoSrc(variant, color)}
+    alt={alt}
+    height={height}
+    draggable={false}
+    style={{ height, width: "auto", display: "block", ...style }}
+    {...rest}
+  />
+);
+
+export const BrandMark = ({ color = "purple", size = 28, alt = "Ryzn", style, ...rest }) => (
+  <img
+    src={logoSrc("mark", color)}
+    alt={alt}
+    width={size}
+    height={size}
+    draggable={false}
+    style={{ width: size, height: size, display: "block", objectFit: "contain", ...style }}
+    {...rest}
+  />
+);
+
+export const BrandIcon = ({ size = 48, light = false, alt = "Ryzn", style, ...rest }) => (
+  <img
+    src={light ? Brand.icon.appLight : Brand.icon.app}
+    alt={alt}
+    width={size}
+    height={size}
+    draggable={false}
+    style={{ width: size, height: size, display: "block", borderRadius: size * 0.235, ...style }}
+    {...rest}
+  />
+);
 
 /* ————— Primitives ————— */
 export const Card = ({ style, children, onClick }) => (
@@ -36,23 +80,16 @@ export const Monogram = ({ name, size = 44, bg = C.purpleTint, color = C.deep, r
     {name.split(" ").map(w => w[0]).slice(0, 2).join("")}
   </div>
 );
-export const Field = ({ label, type = "text", placeholder, value, onChange, right, error, ...inputProps }) => (
+export const Field = ({ label, type = "text", placeholder, value, onChange, right }) => (
   <div style={{ marginTop: 14 }}>
     <Label>{label}</Label>
-    <div style={{ display: "flex", alignItems: "center", background: C.white, border: `1px solid ${error ? C.coral : C.line}`, borderRadius: 12, marginTop: 7, padding: "0 12px" }}>
-      <input type={type} placeholder={placeholder} value={value} onChange={onChange} {...inputProps}
+    <div style={{ display: "flex", alignItems: "center", background: C.white, border: `1px solid ${C.line}`, borderRadius: 12, marginTop: 7, padding: "0 12px" }}>
+      <input type={type} placeholder={placeholder} value={value} onChange={onChange}
         style={{ flex: 1, border: "none", outline: "none", background: "transparent", padding: "13px 2px", fontFamily: F.sans, fontSize: 15, color: C.ink, minWidth: 0 }} />
       {right}
     </div>
-    {error && <div style={{ fontSize: 12, color: C.coral, marginTop: 6 }}>{error}</div>}
   </div>
 );
-export const FormError = ({ children }) => children ? (
-  <div role="alert" style={{ display: "flex", alignItems: "flex-start", gap: 8, background: C.coralTint, border: `1px solid ${C.coral}`, borderRadius: 12, padding: "11px 12px", marginTop: 14, fontSize: 13, color: C.ink, lineHeight: 1.45 }}>
-    <span style={{ color: C.coral, fontWeight: 700, lineHeight: 1.3 }}>!</span>
-    <span>{children}</span>
-  </div>
-) : null;
 export const XPPill = ({ xp, unit = "XP" }) => (
   <span style={{ fontFamily: F.mono, fontSize: 11, fontWeight: 700, background: C.ink, color: "#B7AFF2", padding: "6px 10px", borderRadius: 10, display: "inline-flex", alignItems: "center", gap: 5, whiteSpace: "nowrap" }}>
     <Zap size={11} color="#B7AFF2" /> {xp} {unit}
@@ -155,6 +192,70 @@ export const HeaderRow = ({ title, onBack, right }) => (
 export const Glyph = ({ color = C.purple, size = 46 }) => (
   <svg width={size} height={size}><polygon points={`${size / 2},2 ${size - 2},${size / 2} ${size / 2},${size - 2} 2,${size / 2}`} fill={color} /></svg>
 );
+export const ModalShell = ({ children, onClose }) => (
+  <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(20,16,40,.5)", zIndex: 80, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+    <div onClick={e => e.stopPropagation()} style={{
+      width: "min(94vw, 640px)", height: "min(78vh, 760px)", minHeight: 420,
+      background: C.surface, borderRadius: 24, position: "relative",
+      display: "flex", flexDirection: "column", boxShadow: "0 40px 90px rgba(15,10,35,.35)",
+    }}>
+      <button onClick={onClose} style={{ position: "absolute", top: 14, right: 14, zIndex: 5, width: 32, height: 32, borderRadius: 16, border: "none", background: "rgba(26,26,26,.06)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+        <X size={16} color={C.ink} />
+      </button>
+      <div style={{ flex: 1, overflow: "hidden", borderRadius: 24 }}>
+        <div className="app-scroll" style={{ height: "100%", overflowY: "auto" }}>{children}</div>
+      </div>
+    </div>
+  </div>
+);
+
+export const AuthCardShell = ({ children }) => (
+  <div style={{
+    position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+    background: "radial-gradient(120% 100% at 50% -10%, #F2F1EE 0%, #E9E8E4 45%, #DEDCD6 100%)",
+  }}>
+    <div style={{
+      width: "min(94vw, 440px)", height: "min(82vh, 760px)", minHeight: 420,
+      background: C.surface, borderRadius: 28, overflow: "hidden", position: "relative",
+      boxShadow: "0 40px 90px rgba(15,10,35,.18), 0 0 0 1px rgba(0,0,0,.04)",
+    }}>
+      {children}
+    </div>
+  </div>
+);
+
+export const Sidebar = ({ nav, tab, overlay, onSelect, role, onSettings, onLogout }) => (
+  <div style={{ width: 240, flexShrink: 0, borderRight: `1px solid ${C.line}`, background: C.white, display: "flex", flexDirection: "column", height: "100%" }}>
+    <div style={{ padding: "26px 22px 20px" }}>
+      <BrandLogo variant="horizontal" color="purple" height={26} />
+    </div>
+    <div style={{ flex: 1, padding: "0 12px", display: "flex", flexDirection: "column", gap: 2 }}>
+      {nav.map(([id, Icon, label]) => {
+        const active = tab === id && !overlay;
+        return (
+          <button key={id} onClick={() => onSelect(id)} style={{
+            display: "flex", alignItems: "center", gap: 12, padding: "11px 12px", borderRadius: 12,
+            border: "none", cursor: "pointer", textAlign: "left", fontFamily: F.sans, fontWeight: 600, fontSize: 14,
+            background: active ? C.purpleTint : "transparent", color: active ? C.purple : C.ink, width: "100%",
+          }}>
+            <Icon size={18} color={active ? C.purple : C.gray} strokeWidth={active ? 2.4 : 2} />
+            {label}
+          </button>
+        );
+      })}
+    </div>
+    <div style={{ padding: 14, borderTop: `1px solid ${C.line}`, display: "flex", alignItems: "center", gap: 10 }}>
+      <Monogram name={role === "mentee" ? "Alex Reyes" : "Jordan Clarke"} size={36} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{role === "mentee" ? "Alex Reyes" : "Jordan Clarke"}</div>
+        <div style={{ fontFamily: F.mono, fontSize: 9, color: C.gray, letterSpacing: 0.6, textTransform: "uppercase" }}>{role}</div>
+      </div>
+      <button onClick={onSettings} title="Settings" style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 8, display: "flex" }}><Settings size={16} color={C.gray} /></button>
+      <button onClick={onLogout} title="Log out" style={{ background: "none", border: "none", cursor: "pointer", padding: 6, borderRadius: 8, display: "flex" }}><LogOut size={16} color={C.gray} /></button>
+    </div>
+  </div>
+);
+
 export const StatusBar = ({ dark = true }) => {
   const color = dark ? C.ink : C.white;
   return (
@@ -168,6 +269,7 @@ export const StatusBar = ({ dark = true }) => {
     </div>
   );
 };
+
 export const TypingDots = () => (
   <div style={{ display: "flex", gap: 4, padding: "12px 14px", background: C.white, border: `1px solid ${C.line}`, borderRadius: "14px 14px 14px 4px", width: "fit-content" }}>
     {[0, 1, 2].map(i => <span key={i} className="dot" style={{ width: 6, height: 6, borderRadius: 3, background: "#B3AEE6", animationDelay: `${i * 0.15}s` }} />)}

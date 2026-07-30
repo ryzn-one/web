@@ -7,7 +7,7 @@ import {
   X, SlidersHorizontal, RotateCcw, Search
 } from "lucide-react";
 import { C, F, TIER_COLOR, DECK_COLORS } from "./theme.js";
-import { Card, Label, Btn, Monogram, Field, XPPill, Ring, Bar, QR, BadgeGlyph, BadgeTile, Heatmap, HeaderRow, Glyph, TypingDots } from "./ui.jsx";
+import { Card, Label, Btn, Monogram, Field, XPPill, Ring, Bar, QR, BadgeGlyph, BadgeTile, Heatmap, HeaderRow, Glyph, TypingDots, BrandLogo } from "./ui.jsx";
 import {
   BADGE_DEFS, GENERAL_INFLUENCERS, INFLUENCERS_BY_CATEGORY, MENTEE_SCRIPT, MENTOR_SCRIPT,
   MENTOR_MATCHES, MENTEE_MATCHES, EXTRA_MENTEES, MENTEE_POOL, RETURNING_MENTEES, STATUS,
@@ -166,15 +166,21 @@ export const SettingsScreen = ({ back, role, toast, onLogout }) => {
           <LogOut size={16} color={C.coral} />
           <span style={{ fontSize: 14, fontWeight: 700, color: C.coral }}>Log out</span>
         </Card>
-        <div style={{ textAlign: "center", fontFamily: F.mono, fontSize: 9.5, color: "#A5A39D", marginTop: 6 }}>RYZN · RYZN.ONE · RISE NOW.</div>
+        <div style={{ textAlign: "center", marginTop: 6 }}>
+          <BrandLogo variant="wordmark" color="ink" height={14} style={{ margin: "0 auto 6px", opacity: 0.55 }} />
+          <div style={{ fontFamily: F.mono, fontSize: 9.5, color: "#A5A39D" }}>RYZN.ONE · RISE NOW.</div>
+        </div>
+        <div style={{ textAlign: "center", fontFamily: F.mono, fontSize: 9.5, color: "#A5A39D", marginTop: 4 }}>
+          BUILT BY <a href="https://runbos.ai" target="_blank" rel="noopener noreferrer" style={{ color: C.ink, fontWeight: 700, textDecoration: "none" }}>BOS</a>
+        </div>
       </div>
     </div>
   );
 };
 
 export const BadgeModal = ({ badge, index, close, toast }) => badge && (
-  <div onClick={close} style={{ position: "absolute", inset: 0, background: "rgba(26,26,26,.5)", zIndex: 40, display: "flex", alignItems: "flex-end" }}>
-    <div onClick={e => e.stopPropagation()} className="sheet-up" style={{ background: C.white, width: "100%", borderRadius: "22px 22px 0 0", padding: "20px 22px 26px", boxSizing: "border-box" }}>
+  <div onClick={close} style={{ position: "fixed", inset: 0, background: "rgba(26,26,26,.5)", zIndex: 90, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+    <div onClick={e => e.stopPropagation()} className="sheet-up" style={{ background: C.white, width: "100%", maxWidth: 480, borderRadius: "22px 22px 0 0", padding: "20px 22px 26px", boxSizing: "border-box" }}>
       <div style={{ width: 38, height: 4, background: "#D8D6D0", borderRadius: 2, margin: "0 auto 16px" }} />
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BadgeTile badge={badge} i={index} size={76} />
@@ -199,7 +205,7 @@ export const BadgeModal = ({ badge, index, close, toast }) => badge && (
 );
 
 export const MidwayUnlock = ({ onClose, toast }) => (
-  <div style={{ position: "absolute", inset: 0, background: C.purple, zIndex: 50, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 30, textAlign: "center", color: C.white }}>
+  <div style={{ position: "fixed", inset: 0, background: C.purple, zIndex: 90, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 30, textAlign: "center", color: C.white }}>
     <div style={{ fontFamily: F.mono, fontSize: 10, letterSpacing: 2.5, color: "#C9C3F2" }}>MILESTONE 4 OF 8</div>
     <div className="badge-pop" style={{ width: 118, height: 118, background: C.white, margin: "26px 0", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <BadgeGlyph i={3} color={C.purple} size={54} />
